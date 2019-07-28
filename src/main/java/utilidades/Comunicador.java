@@ -2,15 +2,19 @@ package utilidades;
 
 import java.util.Scanner;
 
-public class Comunicador {
+public interface Comunicador {
 
-    private Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
 
-    public static void escreve(Object objeto) {
+    default void escreve(Object objeto) {
         System.out.println(objeto);
     }
 
-    protected String entraString() {
+    default void escreveFormatado(String objeto, Object ...parametros) {
+        System.out.printf(objeto, parametros);
+    }
+
+    default String entraString() {
         return scan.nextLine();
     }
 

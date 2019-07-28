@@ -1,15 +1,12 @@
+import aplicacao.Importador;
 import aplicacao.Menu;
-import utilidades.Comunicador;
 
-public class ApplicationRunner extends Comunicador {
+public class ApplicationRunner {
 
     public static void main(String[] args) {
 
-        escreve("Importando dados de arquivo...");
-        escreve("Importando dados de API...");
+        new Importador().importaDados();
 
-        Menu menu = new Menu();
-        menu.iniciaMenu();
     }
 
 

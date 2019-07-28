@@ -1,8 +1,13 @@
 package aplicacao;
 
+import modelos.CalculosTransacoes;
+import modelos.Transacoes;
+import servicos.CalculosServico;
 import utilidades.Comunicador;
 
-public class Menu extends Comunicador {
+public class Menu implements Comunicador {
+
+    private CalculosTransacoes calculosTransacoes;
 
     private final static String menu = "------ Menu ------\n" +
             "1 - Histórico de movimentações\n" +
@@ -16,7 +21,7 @@ public class Menu extends Comunicador {
             "Escolha uma opção: ";
 
     public void iniciaMenu() {
-        Integer opcaoMenu = imprimeObtemOpcaoMenu();
+        Integer opcaoMenu = imprimeEObtemOpcaoMenu();
 
         switch (opcaoMenu){
             case 0 :
@@ -28,26 +33,33 @@ public class Menu extends Comunicador {
                 break;
             case 2:
                 escreve("Gasto por categoria");
+
+                calculosTransacoes.getGastoPorCategoria().entrySet().iterator().forEachRemaining(entry -> {
+                    escreveFormatado("Categoria: %s\t\tGasto: %s\n", entry.getKey(), entry.getValue());
+                });
                 pressioneParaProsseguir();
                 break;
             case 3:
-                escreve("Categoria com maior gasto");
+                escreveFormatado("Categoria com maior gasto: %s\tValor: %s\n", calculosTransacoes.getCategoriaMaisGastou(), calculosTransacoes.getGastoMaiorCategoria());
                 pressioneParaProsseguir();
                 break;
             case 4:
-                escreve("Mes com maior gasto");
+                escreveFormatado("Mes com maior gasto: %s\tValor: %s\n", calculosTransacoes.getMesMaisGastou(), calculosTransacoes.getGastoMaiorMes());
                 pressioneParaProsseguir();
                 break;
             case 5:
-                escreve("inheiro total gasto");
+                escreveFormatado("A soma de todos os gastos é: %s\n", calculosTransacoes.getGastosTotais().toString());
+
                 pressioneParaProsseguir();
                 break;
             case 6:
-                escreve("Dinheiro total recebido");
+                escreveFormatado("A soma de todos os recebimentos é: %s\n", calculosTransacoes.getRecebimentosTotais().toString());
+
                 pressioneParaProsseguir();
                 break;
             case 7:
-                escreve("Saldo total de movimentações");
+                escreveFormatado("Saldo total movimentado é: %s\n", calculosTransacoes.getMovimentacaoTotal().toString());
+
                 pressioneParaProsseguir();
                 break;
         }
@@ -60,19 +72,22 @@ public class Menu extends Comunicador {
         entraString();
     }
 
-    private Integer imprimeObtemOpcaoMenu() {
+    private Integer imprimeEObtemOpcaoMenu() {
         escreve(menu);
         try {
             Integer opcao = Integer.parseInt(entraString());
 
             if(opcao < 0 || opcao > 7){
-                return imprimeObtemOpcaoMenu();
+                return imprimeEObtemOpcaoMenu();
             }
 
             return opcao;
         } catch (Exception e){
-            return imprimeObtemOpcaoMenu();
+            return imprimeEObtemOpcaoMenu();
         }
     }
 
+    public Menu(Transacoes transacoes) {
+        calculosTransacoes = CalculosServico.realizaCalculos(transacoes);
+    }
 }

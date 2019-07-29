@@ -1,10 +1,11 @@
 package modelos;
 
+import java.util.List;
 import java.util.Map;
 
 public class CalculosTransacoes {
 
-    private Double gastosTotais;
+    private Double pagamentosTotais;
     private Double recebimentosTotais;
     private Double movimentacaoTotal;
     private Map<String, Double> gastoPorCategoria;
@@ -12,13 +13,14 @@ public class CalculosTransacoes {
     private Double gastoMaiorMes;
     private String categoriaMaisGastou;
     private Double gastoMaiorCategoria;
+    private List<Transacao> transacoesOrdenadas;
 
-    public Double getGastosTotais() {
-        return gastosTotais;
+    public Double getPagamentosTotais() {
+        return pagamentosTotais;
     }
 
-    public void setGastosTotais(Double gastosTotais) {
-        this.gastosTotais = gastosTotais;
+    public void setPagamentosTotais(Double pagamentosTotais) {
+        this.pagamentosTotais = pagamentosTotais;
     }
 
     public Double getRecebimentosTotais() {
@@ -75,5 +77,13 @@ public class CalculosTransacoes {
 
     public void setGastoMaiorCategoria(Double gastoMaiorCategoria) {
         this.gastoMaiorCategoria = gastoMaiorCategoria;
+    }
+
+    public List<Transacao> getTransacoesOrdenadas() {
+        return transacoesOrdenadas;
+    }
+
+    public void setTransacoesOrdenadas(List<Transacao> transacoesOrdenadas) {
+        this.transacoesOrdenadas = transacoesOrdenadas;
     }
 }

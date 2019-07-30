@@ -1,7 +1,5 @@
 package dto;
 
-import modelos.Transacao;
-
 import java.util.List;
 
 public class GetTransacoesDTO {

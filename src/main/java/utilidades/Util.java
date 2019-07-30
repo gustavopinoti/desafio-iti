@@ -1,13 +1,12 @@
 package utilidades;
 
 import java.text.Normalizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Util {
 
     public static String removeCaracteresEspeciais(String texto) {
-        return Normalizer.normalize(texto, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        texto = Normalizer.normalize(texto, Normalizer.Form.NFD);
+        return texto.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
     }
 
     public static Double stringParaDouble(String textoNumerico){

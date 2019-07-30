@@ -30,7 +30,7 @@ public class Transacao {
             transacao.setNumeroMes(mes.getNumero());
             transacao.setMes(mes.getNome());
         });
-        transacao.setCategoria(transacaoDTO.getCategoria() == null || transacaoDTO.getCategoria().isEmpty() ? "SEM CATEGORIA" : transacaoDTO.getCategoria().toUpperCase());
+        transacao.setCategoria(transacaoDTO.getCategoria() == null || transacaoDTO.getCategoria().isEmpty() ? "SEM CATEGORIA" :  Util.removeCaracteresEspeciais(transacaoDTO.getCategoria().toUpperCase()));
         transacao.setDescricao(transacaoDTO.getDescricao());
         transacao.setMoeda(transacaoDTO.getMoeda());
         transacao.setValor(Util.stringParaDouble(transacaoDTO.getValor()));
@@ -50,7 +50,7 @@ public class Transacao {
             transacao.setNumeroMes(mes.getNumero());
             transacao.setMes(mes.getNome());
         });
-        transacao.setCategoria(categoria == null || categoria.isEmpty() ? "SEM CATEGORIA" : categoria.toUpperCase());
+        transacao.setCategoria(categoria == null || categoria.isEmpty() ? "SEM CATEGORIA" : Util.removeCaracteresEspeciais(categoria.toUpperCase()));
         transacao.setDescricao(descricao);
         transacao.setValor(Util.stringParaDouble(valor));
 

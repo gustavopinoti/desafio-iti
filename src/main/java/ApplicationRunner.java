@@ -1,5 +1,4 @@
 import aplicacao.Importador;
-import aplicacao.Menu;
 
 public class ApplicationRunner {
 

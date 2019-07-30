@@ -7,9 +7,8 @@ import servicos.HttpServico;
 import utilidades.Comunicador;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,8 +40,8 @@ public class Importador extends Comunicador {
     private void importaArquivo(Transacoes transacoes) {
 
         try{
-            FileInputStream fstream = new FileInputStream("dados.log");
-            BufferedReader br = new BufferedReader(new InputStreamReader(fstream, StandardCharsets.UTF_8));
+            InputStream fstream = Importador.class.getResourceAsStream("/dados.log");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream, "windows-1252"));
             String strLine, data, descricao, valor, categoria;
 
             Transacoes transacoesArquivo = new Transacoes();

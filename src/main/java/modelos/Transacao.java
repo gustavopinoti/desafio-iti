@@ -2,6 +2,7 @@ package modelos;
 
 import dto.TransacaoDTO;
 import utilidades.NumeroMes;
+import utilidades.Util;
 
 public class Transacao {
 
@@ -17,22 +18,41 @@ public class Transacao {
 
     private String categoria;
 
-    public static Transacao buildFromTransacaoDTO(TransacaoDTO transacaoDTO) {
+    public static Transacao constroiDeTransacaoDTO(TransacaoDTO transacaoDTO) {
 
         Transacao transacao = new Transacao();
 
         String[] data = transacaoDTO.getData().split("/");
 
-        transacao.setDia(data[0]);
+        transacao.setDia(data[0].trim());
 
-        NumeroMes.getByName(data[1]).ifPresent(mes -> {
+        NumeroMes.getPorNomePt(data[1]).ifPresent(mes -> {
             transacao.setNumeroMes(mes.getNumero());
             transacao.setMes(mes.getNome());
         });
-        transacao.setCategoria(transacaoDTO.getCategoria() != null && transacaoDTO.getCategoria().isEmpty() ? "não possui" : transacaoDTO.getCategoria());
+        transacao.setCategoria(transacaoDTO.getCategoria() == null || transacaoDTO.getCategoria().isEmpty() ? "SEM CATEGORIA" : transacaoDTO.getCategoria().toUpperCase());
         transacao.setDescricao(transacaoDTO.getDescricao());
         transacao.setMoeda(transacaoDTO.getMoeda());
-        transacao.setValor(Double.valueOf(transacaoDTO.getValor().replaceAll(" ", "").replaceAll(",", ".")));
+        transacao.setValor(Util.stringParaDouble(transacaoDTO.getValor()));
+
+        return transacao;
+    }
+
+    public static Transacao constroiDeLinhaArquivo(String dataArquivo, String descricao, String valor, String categoria) {
+
+        Transacao transacao = new Transacao();
+
+        String[] data = dataArquivo.split("-");
+
+        transacao.setDia(data[0]);
+
+        NumeroMes.getPorNomeEn(data[1]).ifPresent(mes -> {
+            transacao.setNumeroMes(mes.getNumero());
+            transacao.setMes(mes.getNome());
+        });
+        transacao.setCategoria(categoria == null || categoria.isEmpty() ? "SEM CATEGORIA" : categoria.toUpperCase());
+        transacao.setDescricao(descricao);
+        transacao.setValor(Util.stringParaDouble(valor));
 
         return transacao;
     }

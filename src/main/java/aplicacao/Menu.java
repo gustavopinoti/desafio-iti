@@ -5,7 +5,7 @@ import modelos.Transacoes;
 import servicos.CalculosServico;
 import utilidades.Comunicador;
 
-public class Menu implements Comunicador {
+public class Menu extends Comunicador {
 
     private CalculosTransacoes calculosTransacoes;
 
@@ -71,7 +71,7 @@ public class Menu implements Comunicador {
     }
 
     private void pressioneParaProsseguir() {
-        escreveFormatado("Pressione qualquer tecla...");
+        escreveFormatado("Pressione Enter...");
         entraString();
     }
 

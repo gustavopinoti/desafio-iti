@@ -11,18 +11,18 @@ public class Transacoes {
 
     private List<Transacao> recebimentos;
 
-    public static Transacoes buildFromGetTransacoes(GetTransacoesDTO transacoesDTO) {
+    public static Transacoes construirDeGetTransacoes(GetTransacoesDTO transacoesDTO) {
 
         Transacoes transacoes = new Transacoes();
         transacoes.setPagamentos(new ArrayList<>());
         transacoes.setRecebimentos(new ArrayList<>());
 
         transacoesDTO.getPagamentos().forEach(transacao -> {
-            transacoes.getPagamentos().add(Transacao.buildFromTransacaoDTO(transacao));
+            transacoes.getPagamentos().add(Transacao.constroiDeTransacaoDTO(transacao));
         });
 
         transacoesDTO.getRecebimentos().forEach(transacao -> {
-            transacoes.getRecebimentos().add(Transacao.buildFromTransacaoDTO(transacao));
+            transacoes.getRecebimentos().add(Transacao.constroiDeTransacaoDTO(transacao));
         });
 
         return transacoes;

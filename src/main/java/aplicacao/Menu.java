@@ -28,45 +28,29 @@ public class Menu extends Comunicador {
                 escreve("Até breve!");
                 return;
             case 1 :
-                calculosTransacoes.getTransacoesOrdenadas().forEach(transacao -> {
-
-                    escreveFormatado("Valor: %.2f\t\tDescricao: %s\t\tDia: %s\t\tMês: %s\t\tCategoria: %s\n", transacao.getValor(), transacao.getDescricao(), transacao.getDia(), transacao.getMes(), transacao.getCategoria());
-                });
-                pressioneParaProsseguir();
+                calculosTransacoes.getTransacoesOrdenadas().forEach(transacao -> escreveFormatado("Valor: %.2f\t\tDescricao: %s\t\tDia: %s\t\tMês: %s\t\tCategoria: %s\n", transacao.getValor(), transacao.getDescricao(), transacao.getDia(), transacao.getMes(), transacao.getCategoria()));
                 break;
             case 2:
-                escreve("Gasto por categoria");
-
-                calculosTransacoes.getGastoPorCategoria().entrySet().iterator().forEachRemaining(entry -> {
-                    escreveFormatado("Categoria: %s\t\tGasto: %.2f\n", entry.getKey(), entry.getValue());
-                });
-                pressioneParaProsseguir();
+                calculosTransacoes.getGastoPorCategoria().entrySet().iterator().forEachRemaining(entry -> escreveFormatado("Categoria: %s\t\tGasto: %.2f\n", entry.getKey(), entry.getValue()));
                 break;
             case 3:
                 escreveFormatado("Categoria com maior gasto: %s\tValor: %.2f\n", calculosTransacoes.getCategoriaMaisGastou(), calculosTransacoes.getGastoMaiorCategoria());
-                pressioneParaProsseguir();
                 break;
             case 4:
                 escreveFormatado("Mês com maior gasto: %s\tValor: %.2f\n", calculosTransacoes.getMesMaisGastou(), calculosTransacoes.getGastoMaiorMes());
-                pressioneParaProsseguir();
                 break;
             case 5:
                 escreveFormatado("A soma de todos os gastos é: %.2f\n", calculosTransacoes.getPagamentosTotais());
-
-                pressioneParaProsseguir();
                 break;
             case 6:
                 escreveFormatado("A soma de todos os recebimentos é: %.2f\n", calculosTransacoes.getRecebimentosTotais());
-
-                pressioneParaProsseguir();
                 break;
             case 7:
                 escreveFormatado("Saldo total movimentado é: %.2f\n", calculosTransacoes.getMovimentacaoTotal());
-
-                pressioneParaProsseguir();
                 break;
         }
 
+        pressioneParaProsseguir();
         iniciaMenu();
     }
 

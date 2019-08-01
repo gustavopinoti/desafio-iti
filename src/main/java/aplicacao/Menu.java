@@ -75,6 +75,7 @@ public class Menu extends Comunicador {
     }
 
     public Menu(Transacoes transacoes) {
-        calculosTransacoes = CalculosServico.realizaCalculos(transacoes);
+        CalculosServico calculosServico = new CalculosServico();
+        calculosTransacoes = calculosServico.realizaCalculos(transacoes);
     }
 }

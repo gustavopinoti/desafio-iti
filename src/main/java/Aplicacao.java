@@ -1,6 +1,6 @@
 import aplicacao.Importador;
 
-public class ApplicationRunner {
+public class Aplicacao {
 
     public static void main(String[] args) {
 

@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
 
 public class Importador extends Comunicador {
 
+    private HttpServico httpServico;
+
     public void importaDados() {
 
         Transacoes transacoes = new Transacoes();
@@ -33,12 +35,15 @@ public class Importador extends Comunicador {
             return;
         }
 
-        Menu menu = new Menu(transacoes);
-        menu.iniciaMenu();
+       iniciaMenu(transacoes);
 
     }
 
-    private void importaArquivo(Transacoes transacoes) {
+    public void iniciaMenu(Transacoes transacoes) {
+        new Menu(transacoes).iniciaMenu();
+    }
+
+    public void importaArquivo(Transacoes transacoes) {
 
         try{
             InputStream fstream = Importador.class.getResourceAsStream("/dados.log");
@@ -81,9 +86,9 @@ public class Importador extends Comunicador {
 
     }
 
-    private void importaDaAPI(Transacoes transacoes) {
+    public void importaDaAPI(Transacoes transacoes) {
         try {
-            GetTransacoesDTO getTransacoes = HttpServico.getTransacoesAPI();
+            GetTransacoesDTO getTransacoes = httpServico.getTransacoesAPI();
 
             Transacoes transacoesAPI = Transacoes.construirDeGetTransacoes(getTransacoes);
 
@@ -95,7 +100,7 @@ public class Importador extends Comunicador {
         }
     }
 
-
-
-
+    public Importador() {
+        httpServico = new HttpServico();
+    }
 }

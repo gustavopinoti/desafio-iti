@@ -11,12 +11,15 @@ import java.nio.charset.StandardCharsets;
 
 public class HttpServico {
 
-    public static GetTransacoesDTO getTransacoesAPI() throws Exception {
+    private static final String API_URL = "https://my-json-server.typicode.com/cairano/backend-test/db";
 
-        String url = "https://my-json-server.typicode.com/cairano/backend-test/db";
+    private Gson gson;
 
-        URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+    public GetTransacoesDTO getTransacoesAPI() throws Exception {
+
+
+        URL obj = new URL(API_URL);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
@@ -28,8 +31,11 @@ public class HttpServico {
         }
         in.close();
 
-        return new Gson().fromJson(response.toString(), GetTransacoesDTO.class);
+        return gson.fromJson(response.toString(), GetTransacoesDTO.class);
 
     }
 
+    public HttpServico() {
+        gson = new Gson();
+    }
 }
